@@ -14,6 +14,8 @@
 
 use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\SimpleRouter\SimpleRouter as Router;
+use PHPExperts\WorkDayPlannerAPI\Controllers\WorkdayPlannerController;
+use PHPExperts\WorkDayPlannerAPI\Controllers\WorkdayPlannerController;
 
 SimpleRouter::get('/', function () {
     return <<<HTML
@@ -42,6 +44,11 @@ SimpleRouter::get('/', function () {
     HTML;
 });
 
+// Workday Planner API endpoints
+SimpleRouter::post('/workday', [WorkdayPlannerController::class, 'workday']);
+SimpleRouter::post('/holiday', [WorkdayPlannerController::class, 'holiday']);
+SimpleRouter::post('/workdays', [WorkdayPlannerController::class, 'workdays']);
+
 SimpleRouter::post('/highlight', function () {
     $response = Router::response();
     $data     = json_decode(file_get_contents('php://input'), true);
@@ -66,3 +73,8 @@ SimpleRouter::post('/highlight', function () {
 
     return $highlighter->parse($text, strtolower($lang));
 });
+
+// Workday Planner API endpoints
+SimpleRouter::post('/workday', [WorkdayPlannerController::class, 'workday']);
+SimpleRouter::post('/holiday', [WorkdayPlannerController::class, 'holiday']);
+SimpleRouter::post('/workdays', [WorkdayPlannerController::class, 'workdays']);

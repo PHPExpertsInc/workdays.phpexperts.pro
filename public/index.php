@@ -37,7 +37,7 @@ header('Access-Control-Allow-Origin: *');
  * Can be overwritten by using the namespace config option on your routes.
  */
 
-SimpleRouter::setDefaultNamespace('\Demo\Controllers');
+SimpleRouter::setDefaultNamespace('\PHPExperts\WorkDayPlannerAPI\Controllers');
 
 // Start the routing
 SimpleRouter::start();
