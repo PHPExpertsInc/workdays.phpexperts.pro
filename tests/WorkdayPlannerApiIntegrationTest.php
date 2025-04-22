@@ -39,7 +39,7 @@ final class WorkdayPlannerApiIntegrationTest extends TestCase
 
     public function testWorkdaysRange(): void
     {
-        $response = $this->api->post('workdays', [
+        $response = $this->api->post('workdays-range', [
             'startDate' => '2023-10-02',
             'endDate'   => '2023-10-06',
         ]);

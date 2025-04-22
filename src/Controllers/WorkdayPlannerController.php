@@ -8,8 +8,6 @@ use PHPExperts\WorkdayPlanner\WorkdayPlanner as Planner;
 use PHPExperts\WorkDayPlannerAPI\DTO\WorkdayRequest;
 use PHPExperts\WorkDayPlannerAPI\DTO\HolidayRequest;
 use PHPExperts\WorkDayPlannerAPI\DTO\WorkdayRangeRequest;
-use function PHPExperts\WorkDayPlannerAPI\input;
-use function PHPExperts\WorkDayPlannerAPI\response;
 use DateTime;
 use Exception;
 
@@ -46,7 +44,7 @@ class WorkdayPlannerController
         response()->json(['date' => $date, 'isHoliday' => $isHoliday]);
     }
 
-    public function workdays(): void
+    public function workdaysRange(): void
     {
         $data = input()->all();
         try {
