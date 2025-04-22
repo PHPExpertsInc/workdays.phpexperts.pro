@@ -1,0 +1,77 @@
+{
+    "name": "phpexperts/mini-api-base",
+    "description": "A quick and easy standard PHP skeleton.",
+    "keywords": [
+        "universal package layout",
+        "standard package layout",
+        "new project",
+        "project layout"
+    ],
+    "homepage": "https://www.phpexperts.pro/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PHP Experts, Inc.",
+            "homepage": "https://www.phpexperts.pro/"
+        },
+        {
+            "name": "Theodore R. Smith",
+            "homepage": "https://www.linkedin.com/in/tedrsmith"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "ext-json": "*",
+        "minicli/minicli": "^4.2",
+        "pecee/simple-router": "^5.4",
+        "phpexperts/console-painter": "^1.1",
+        "phpexperts/laravel-env-polyfill": "^1.7",
+        "phpexperts/rest-speaker": "^2.7",
+        "phpexperts/simple-dto": "^3.7",
+        "illuminate/database": "^11.37",
+        "illuminate/events": "^11.37",
+        "illuminate/filesystem": "^11.37",
+        "0.0.0/composer-include-files": "^1.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "phpstan/phpstan": "*",
+        "friendsofphp/php-cs-fixer": "*",
+        "symfony/var-dumper": "*",
+        "povils/phpmnd": "*",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPExperts\\MiniApiBase\\" : ".framework/",
+            "PHPExperts\\workdir\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "PHPExperts\\MiniApiBase\\Tests\\" : "tests/" }
+    },
+    "config": {
+        "classmap-authoritative": true,
+        "allow-plugins": {
+            "0.0.0/composer-include-files": true
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "php install.php"
+        ]
+    },
+    "extra": {
+        "include_files": [
+            "src/helpers.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "0.0.0/composer-include-files": true
+        }
+    },
+    "repositories": [
+        { "type": "git", "url": "https://github.com/PHPExperts-Contribs/minicli.git" }
+    ]
+}
