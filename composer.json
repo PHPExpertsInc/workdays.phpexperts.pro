@@ -30,7 +30,8 @@
         "phpexperts/simple-dto": "^3.7",
         "illuminate/database": "^11.37",
         "illuminate/events": "^11.37",
-        "illuminate/filesystem": "^11.37"
+        "illuminate/filesystem": "^11.37",
+        "phpexperts/workday-planner": "^1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
