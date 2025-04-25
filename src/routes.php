@@ -1,33 +1,64 @@
 <?php declare(strict_types=1);
 
-/**
- * This file is part of MiniApiBase, a PHP Experts, Inc., Project.
- *
- * Copyright © 2024-2025 PHP Experts, Inc.
- * Author: Theodore R. Smith <theodore@phpexperts.pro>
- *   GPG Fingerprint: 4BF8 2613 1C34 87AC D28F  2AD8 EB24 A91D D612 5690
- *   https://www.phpexperts.pro/
- *   https://github.com/PHPExpertsInc/MiniApiBase
- *
- * This file is licensed under the MIT License.
- */
-
 use Pecee\SimpleRouter\SimpleRouter;
-use Pecee\SimpleRouter\SimpleRouter as Router;
+use PHPExperts\WorkdayPlanner\Controllers\WorkdayPlannerController;
 
 SimpleRouter::get('/', function () {
     return <<<HTML
     <!DOCTYPE html>
     <html>
         <head>
-            <link rel="stylesheet" href="/css/main.css" />
+            <title>Workday Planner API</title>
             <style>
-            code { display: block; white-space: pre; font-family: 'Fira Code', monospace; } 
+                body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+                h1 { color: #2c3e50; }
+                .endpoint { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+                .method { font-weight: bold; color: #2980b9; }
+                .url { font-family: monospace; background: #eaeaea; padding: 2px 5px; border-radius: 3px; }
+                .param { font-family: monospace; color: #c0392b; }
             </style>
         </head>
-        <body style="background: #DFDFFF">
-            <h1>An API Server created by <a href="https://www.autonomo.codes/">Autonomo by Autonomous Programming, LLC</a>.</h1>
+        <body>
+            <h1>Workday Planner API Documentation</h1>
+            
+            <div class="endpoint">
+                <h2>Check if a date is a workday</h2>
+                <p><span class="method">GET</span> <span class="url">/api/workday/{date}/{country?}</span></p>
+                <p>Parameters:</p>
+                <ul>
+                    <li><span class="param">date</span> - Date in YYYY-MM-DD format (required)</li>
+                    <li><span class="param">country</span> - Country code (default: us)</li>
+                </ul>
+                <p>Example: <span class="url">/api/workday/2023-12-25</span></p>
+            </div>
+            
+            <div class="endpoint">
+                <h2>Get holiday date</h2>
+                <p><span class="method">GET</span> <span class="url">/api/holiday/{name}/{country?}</span></p>
+                <p>Parameters:</p>
+                <ul>
+                    <li><span class="param">name</span> - Holiday name (required)</li>
+                    <li><span class="param">country</span> - Country code (default: us)</li>
+                </ul>
+                <p>Example: <span class="url">/api/holiday/Christmas</span></p>
+            </div>
+            
+            <div class="endpoint">
+                <h2>Get workdays between dates</h2>
+                <p><span class="method">GET</span> <span class="url">/api/workdays/{startDate}/{endDate}/{country?}</span></p>
+                <p>Parameters:</p>
+                <ul>
+                    <li><span class="param">startDate</span> - Start date in YYYY-MM-DD format (required)</li>
+                    <li><span class="param">endDate</span> - End date in YYYY-MM-DD format (required)</li>
+                    <li><span class="param">country</span> - Country code (default: us)</li>
+                </ul>
+                <p>Example: <span class="url">/api/workdays/2023-12-01/2023-12-31</span></p>
+            </div>
         </body>
     </html>
     HTML;
 });
+
+SimpleRouter::get('/api/workday/{date}/{country?}', [WorkdayPlannerController::class, 'isWorkday']);
+SimpleRouter::get('/api/holiday/{name}/{country?}', [WorkdayPlannerController::class, 'getHoliday']);
+SimpleRouter::get('/api/workdays/{startDate}/{endDate}/{country?}', [WorkdayPlannerController::class, 'getWorkdays']);
