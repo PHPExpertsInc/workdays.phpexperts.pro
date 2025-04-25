@@ -30,9 +30,7 @@
         "phpexperts/simple-dto": "^3.7",
         "illuminate/database": "^11.37",
         "illuminate/events": "^11.37",
-        "illuminate/filesystem": "^11.37",
-        "0.0.0/composer-include-files": "^1.6",
-        "phpexperts/workday-planner": "^1.2"
+        "illuminate/filesystem": "^11.37"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
@@ -45,7 +43,7 @@
     "autoload": {
         "psr-4": {
             "PHPExperts\\MiniApiBase\\" : ".framework/",
-            "PHPExperts\\workdir\\": "src/"
+            "PHPExperts\\WorkdayPlannerAPI\\": "src/"
         }
     },
     "autoload-dev": {
