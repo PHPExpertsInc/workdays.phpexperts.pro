@@ -10,42 +10,42 @@ use PHPExperts\WorkdayPlanner\WorkdayPlanner;
 
 class WorkdayPlannerController
 {
-    public function isWorkday($date, $country = 'us'): array
+    public function isWorkday($date, $country = 'us'): string
     {
-         = new \DateTime($date);
-         = WorkdayDetector::isWorkday($date, $country);
+        $date = new \DateTime($date);
+        $isWorkday = WorkdayDetector::isWorkday($date, $country);
 
-        return [
+        return response()->json([
             'date'    => $date->format('Y-m-d'),
             'country' => $country,
             'isWorkday' => $isWorkday,
-        ];
+        ]);
     }
 
-    public function getHoliday($holidayName, $country = 'us'): array
+    public function getHoliday($holidayName, $country = 'us'): string
     {
         $holidayDetector = new HolidayDetector($country);
         $holiday = $holidayDetector->getHoliday($holidayName);
 
-        return [
+        return response()->json([
             'holiday' => $holidayName,
             'country' => $country,
             'date'    => $holiday ? $holiday->format('Y-m-d') : null,
-        ];
+        ]);
     }
 
-    public function getWorkdays($startDate, $endDate, $country = 'us'): array
+    public function getWorkdays($startDate, $endDate, $country = 'us'): string
     {
         $start = new \DateTime($startDate);
         $end = new \DateTime($endDate);
         $planner = new WorkdayPlanner($start, $end, $country);
 
-        return [
+        return response()->json([
             'startDate' => $startDate,
             'endDate'   => $endDate,
             'country'   => $country,
             'workdays'  => $planner->getWorkdays(),
             'count'     => count($planner),
-        ];
+        ]);
     }
 }
