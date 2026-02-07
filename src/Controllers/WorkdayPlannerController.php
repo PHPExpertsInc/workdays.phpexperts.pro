@@ -12,8 +12,8 @@ class WorkdayPlannerController
 {
     public function isWorkday($date, $country = 'us'): array
     {
-         = new \DateTime($date);
-         = WorkdayDetector::isWorkday($date, $country);
+        $date = new \DateTime($date);
+        $isWorkday = WorkdayDetector::isWorkday($date, $country);
 
         return [
             'date'    => $date->format('Y-m-d'),
