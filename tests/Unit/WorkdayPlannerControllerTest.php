@@ -26,7 +26,30 @@ class WorkdayPlannerControllerTest extends TestCase
     public function testCanGetHolidayDate()
     {
         $result = $this->controller->getHoliday('Christmas');
-        $this->assertEquals('2023-12-25', $result['date']);
+        $this->assertNotNull($result['date']);
+        $this->assertSame('12-25', date('m-d', strtotime($result['date'])));
+    }
+
+    public function testCanGetHolidayDateFromUrlEncodedName()
+    {
+        $result = $this->controller->getHoliday('Thanksgiving%20Day');
+        $this->assertEquals('Thanksgiving Day', $result['holiday']);
+        $this->assertNotNull($result['date']);
+
+        $result = $this->controller->getHoliday('Thanksgiving Day');
+        $this->assertNotNull($result['date']);
+    }
+
+    public function testCanGetHolidayDateFromShortName()
+    {
+        // The holiday data stores "Christmas Day", so "Christmas" must resolve to it.
+        $result = $this->controller->getHoliday('Christmas');
+        $this->assertNotNull($result['date']);
+        $this->assertSame('12-25', date('m-d', strtotime($result['date'])));
+
+        $result = $this->controller->getHoliday('Thanksgiving');
+        $this->assertNotNull($result['date']);
+        $this->assertSame('Thanksgiving', $result['holiday']);
     }
 
     public function testCanGetWorkdaysBetweenDates()

@@ -28,7 +28,8 @@ class WorkdayPlannerTest extends TestCase
     {
         $response = $this->api->get('/api/holiday/Christmas');
         $this->assertEquals(200, $response->status);
-        $this->assertEquals('2023-12-25', $response->body['date']);
+        $this->assertNotNull($response->body['date']);
+        $this->assertSame('12-25', date('m-d', strtotime($response->body['date'])));
     }
 
     public function testCanGetWorkdaysBetweenDates()

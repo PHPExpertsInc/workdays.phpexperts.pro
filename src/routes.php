@@ -8,7 +8,8 @@ SimpleRouter::get('/', function () {
 });
 
 SimpleRouter::get('/api/workday/{date}/{country?}', [WorkdayPlannerController::class, 'isWorkday']);
-SimpleRouter::get('/api/holiday/{name}/{country?}', [WorkdayPlannerController::class, 'getHoliday']);
+SimpleRouter::get('/api/holiday/{name}/{country?}', [WorkdayPlannerController::class, 'getHoliday'])
+    ->where(['name' => '[^\/]+']);
 SimpleRouter::get('/api/workdays/{startDate}/{endDate}/{country?}', [WorkdayPlannerController::class, 'getWorkdays']);
 
 // API endpoint for volunteer signup
